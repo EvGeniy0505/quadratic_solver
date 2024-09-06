@@ -21,11 +21,11 @@ struct roots
 
 void buff_clean();
 
-void struct_konstr(double first_root, double second_root);
+roots struct_konstr(double first_root, double second_root);
 
 int how_many_roots(double first_coef, double second_coef, double third_coef);
 
-double count_roots(double first_coef, double second_coef, double third_coef);
+roots count_roots(double first_coef, double second_coef, double third_coef);
 
 int main()
 {
@@ -35,6 +35,7 @@ int main()
 
     char* user_answer = (char*) calloc(3, sizeof(char));
 
+    roots final_roots = struct_konstr(0, 0);
 
     printf("Hi, man! Введи 3 числа, коэффициентов квадратного уравнения, чтобы у тебя не порвалось очко\n");
 
@@ -59,11 +60,13 @@ int main()
         switch(how_many_roots(a, b, c))
         {
             case TWO_ROOTS:
-                count_roots(a, b, c);
+                final_roots = count_roots(a, b, c);
+                printf("x_1 = %lf, x_2 = %lf\n", final_roots.x_1, final_roots.x_2);
                 printf("Не, ну 2 корня у уравнения это заебись\n");
                 break;
             case ONE_ROOT:
-                printf("%lf\n", count_roots(a, b, c));
+                final_roots = count_roots(a, b, c);
+                printf("x_1 = %lf\n", final_roots.x_1);
                 printf("Ура!!! Один корень!!! Ты наконец-то узнал длину своего члена!\n");  
                 break;
             case ZERO_ROOTS:
@@ -88,7 +91,7 @@ int main()
 }
 
 
-double count_roots(double first_coef, double second_coef, double third_coef)
+roots count_roots(double first_coef, double second_coef, double third_coef)
 {
     double eps = 0.0000001;
 
@@ -98,14 +101,16 @@ double count_roots(double first_coef, double second_coef, double third_coef)
 
     x_2 = (- second_coef - sqrt(second_coef * second_coef - 4 * first_coef * third_coef)) / (2 * first_coef);
 
+    roots all_roots = struct_konstr(x_1, x_2);
 
     if(abs(x_1 - x_2) < eps)
     {
-        return x_1;
+        all_roots.x_2 = 0;
+        return all_roots;
     }
     else
     {
-        return 1;
+        return all_roots;
     }
 }
 
@@ -146,12 +151,14 @@ void buff_clean()
 
 
 
-//void struct_konstr(double first_root, double second_root)
-//{
-//    roots quadratic;
-//
-//    quadratic = {first_root, second_root};
-//
-//    return quadratic;
-//}
+roots struct_konstr(double first_root, double second_root)
+{
+    roots quadratic;
+
+    quadratic.x_1 = first_root;
+
+    quadratic.x_2 = second_root;
+
+    return quadratic;
+}
 
