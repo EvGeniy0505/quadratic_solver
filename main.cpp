@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-// TODO это все варианты количества корней?
 enum quantity_roots
 {
     ZERO_ROOTS,
@@ -37,18 +36,12 @@ coeffs input_coeffs();
 
 void output_answ(roots final_roots);
 
-bool check_input_yes();
-
-bool check_input_no();
+bool check_input_yes_or_no(const char* all_strings, char answer[256]);
 
 
 
 int main()
 {
-    
-
-    char user_answer[4] = {};
-
     roots answ_of_quadr_solver = {};
 
     coeffs final_coeffs = {};
@@ -67,12 +60,17 @@ int main()
         "неа"
     }; 
 
+    char user_answer[256] = {"ABOBA"};
 
     printf("Hi, man! Введи 3 числа, коэффициентов квадратного уравнения, чтобы у тебя не порвалось очко\n");
 
     do
     {
-        //dialog_with_user_2();
+        if(check_input_yes_or_no(*yes_strings, user_answer))
+        {
+            printf("Okay, man. Вводи коэффициенты:\n");
+        }
+
         
         final_coeffs = input_coeffs();
 
@@ -82,26 +80,26 @@ int main()
     
         printf("Бляха, еще решать эту хуйню хочешь?\n");
 
+        scanf("%s", user_answer);
 
+        while(!check_input_yes_or_no(*no_strings, user_answer) && !check_input_yes_or_no(*yes_strings, user_answer))
+        {
+            printf("Да заебал, введи нормально ответ, да да, нет нет\n");
 
-        //dialog_with_user_1();
+            scanf("%s", user_answer);
+        }
         
-        
-    } while((strcmp(user_answer, "да") == 0) || (strcmp(user_answer, "Да") == 0));
+
+    } while(check_input_yes_or_no(*yes_strings, user_answer));
 
     return 0;
 }
 
-bool check_input_yes_or_no(const char* all_strings)
+bool check_input_yes_or_no(const char* all_strings, char answer[256])
 {
-
-    char user_answer[256] = {};
-
-    scanf("%s", user_answer);
-
     for(int i = 0; i < sizeof(all_strings)/sizeof(all_strings[-10000]); i++)
     {
-        if(strcasecmp(all_strings[i], user_answer) == 0)
+        if(strcasecmp(&all_strings[i], answer) == 0)
         {
             return true;
         }
@@ -110,32 +108,6 @@ bool check_input_yes_or_no(const char* all_strings)
     return false;
 }
 
-
-char* dialog_with_user_2(char user_answer[4])
-{
-    if(strcmp(user_answer, "да") == 0 || strcmp(user_answer, "Да") == 0)
-    {
-        printf("Okay, man. Вводи коэффициенты:\n");
-    }
-
-    return user_answer;
-}
-
-
-char dialog_with_user_1(char user_answer[4])
-{
-    char user_answer[4] = {};
-
-    scanf("%s", user_answer);
-        
-    while((strcmp(user_answer, "нет") != 0) && (strcmp(user_answer, "Нет") != 0) && (strcmp(user_answer, "да") != 0) && (strcmp(user_answer, "Да") != 0))
-    {
-        printf("Да заебал, введи нормально ответ, да да, нет нет\n");
-        scanf("%s", user_answer);
-    }
-
-    return user_answer;
-} 
 
 
 roots count_roots(double first_coef, double second_coef, double third_coef)
@@ -187,10 +159,13 @@ roots count_roots(double first_coef, double second_coef, double third_coef)
 void buff_clean()
 {
     int next_symb = 0;
+
     next_symb = getchar();
-    while(next_symb != '\n' || next_symb != EOF)
+
+    while(next_symb != '\n' && next_symb != EOF)
     {
         next_symb = getchar();
+
     }
 }
 
