@@ -1,11 +1,11 @@
 #include "other_func.h"
 
 
-bool check_input_yes_or_no(const char* all_strings, char answer[256])
+bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quantity_of_strs)
 {
-    for(int i = 0; i < sizeof(all_strings)/sizeof(all_strings[-10000]); i++)
+    for(int i = 0; i < quantity_of_strs; i++)
     {
-        if(strcasecmp(&all_strings[i], answer) == 0)
+        if(strcasecmp(all_strings[i], answer) == 0)
         {
             return true;
         }
@@ -13,6 +13,8 @@ bool check_input_yes_or_no(const char* all_strings, char answer[256])
 
     return false;
 }
+
+
 
 
 
@@ -41,5 +43,20 @@ int equal_null(double var)
     else
     {
         return 0;
+    }
+}
+
+
+void delete_line_break(char* line)
+{
+    int i = 0;
+    while(line[i] != '\n')
+    {
+        i++;
+    }
+
+    if(line[i] == '\n')
+    {
+        line[i] = '\0';
     }
 }

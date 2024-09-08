@@ -15,6 +15,8 @@ int main()
         "сэр да сэр"
     }; 
 
+    size_t size_yes_strings = sizeof(yes_strings) / sizeof(yes_strings[0]);
+
     const char* no_strings[] = {
         "no",
         "нет",
@@ -22,13 +24,15 @@ int main()
         "неа"
     }; 
 
-    char user_answer[256] = {"ABOBA"};
+    size_t size_no_strings = sizeof(no_strings) / sizeof(no_strings[0]);
+
+    char user_answer[256] = {};
 
     printf("Hi, man! Введи 3 числа, коэффициентов квадратного уравнения, чтобы у тебя не порвалось очко\n");
 
     do
     {
-        if(check_input_yes_or_no(*yes_strings, user_answer))
+        if(check_input_yes_or_no(yes_strings, user_answer, size_yes_strings))
         {
             printf("Okay, man. Вводи коэффициенты:\n");
         }
@@ -42,17 +46,24 @@ int main()
     
         printf("Бляха, еще решать эту хуйню хочешь?\n");
 
-        scanf("%s", user_answer);
+        buff_clean();
 
-        while(!check_input_yes_or_no(*no_strings, user_answer) && !check_input_yes_or_no(*yes_strings, user_answer))
+        fgets(user_answer, 256, stdin);
+
+        delete_line_break(user_answer);
+
+        while(!check_input_yes_or_no(no_strings,  user_answer, size_no_strings) &&
+              !check_input_yes_or_no(yes_strings, user_answer, size_yes_strings))
         {
             printf("Да заебал, введи нормально ответ, да да, нет нет\n");
 
-            scanf("%s", user_answer);
+            fgets(user_answer, 256, stdin);
+
+            delete_line_break(user_answer);
         }
         
 
-    } while(check_input_yes_or_no(*yes_strings, user_answer));
+    } while(check_input_yes_or_no(yes_strings, user_answer, size_yes_strings));
 
     printf("Пиздец люблю Полину Новикову и котиков\n");
 
