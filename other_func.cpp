@@ -3,7 +3,7 @@
 
 bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quantity_of_strs)
 {
-    for(int i = 0; i < quantity_of_strs; i++)
+    for(size_t i = 0; i < quantity_of_strs; i++)
     {
         if(strcasecmp(all_strings[i], answer) == 0)
         {

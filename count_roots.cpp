@@ -4,9 +4,7 @@
 
 roots count_roots(double first_coef, double second_coef, double third_coef)
 {
-    double eps = 0.0000001;
-
-    double x_1 = 0, x_2 = 0, det = 0;
+    double eps = 0.0000001, det = 0;
 
     det = (second_coef * second_coef - 4 * first_coef * third_coef);
     
