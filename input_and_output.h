@@ -10,15 +10,16 @@ enum quantity_roots
     ZERO_ROOTS,
     ONE_ROOT,
     TWO_ROOTS,
+    // что такое количество корней "равно"?
     EQUAl = -1
 };
+// TODO блять, заебал
 
-
-struct roots   
+struct roots
 {
     int quantity_of_roots;
     double x_1;
-    double x_2;        
+    double x_2;
 };
 
 struct coeffs

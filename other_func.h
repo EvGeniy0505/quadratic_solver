@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
-
+// TODO чё за пробелы?
 
 
 void buff_clean();
