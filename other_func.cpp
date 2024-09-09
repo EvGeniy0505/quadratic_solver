@@ -21,6 +21,7 @@ bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quan
 
 void buff_clean()
 {
+    // TODO зачем ты присваиваешь нулю, чтобы потом присовить getchar()?
     int next_symb = 0;
 
     next_symb = getchar();
@@ -32,6 +33,7 @@ void buff_clean()
     }
 }
 
+// TODO есть функция abs
 int equal_null(double var)
 {
     double eps = 0.0000001;
@@ -46,7 +48,7 @@ int equal_null(double var)
     }
 }
 
-
+// TODO что, если я сюда передам "Hello"?
 void delete_line_break(char* line)
 {
     int i = 0;
