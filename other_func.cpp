@@ -5,7 +5,7 @@ bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quan
 {
     for(size_t i = 0; i < quantity_of_strs; i++)
     {
-        if(strcasecmp(all_strings[i], answer) == 0)
+        if(strcasecmp(all_strings[i], answer) == 0)   // TODO написать свою
         {
             return true;
         }
@@ -21,24 +21,20 @@ bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quan
 
 void buff_clean()
 {
-    // TODO зачем ты присваиваешь нулю, чтобы потом присовить getchar()?
-    int next_symb = 0;
-
-    next_symb = getchar();
+    int next_symb = getchar();
 
     while(next_symb != '\n' && next_symb != EOF)
     {
         next_symb = getchar();
-
     }
 }
 
-// TODO есть функция abs
+
 int equal_null(double var)
 {
     double eps = 0.0000001;
 
-    if(var < eps && var > -eps)
+    if(abs(var) < eps)
     {
         return 1;
     }
@@ -48,17 +44,19 @@ int equal_null(double var)
     }
 }
 
-// TODO что, если я сюда передам "Hello"?
-void delete_line_break(char* line)
+void user_request(char answer[])
 {
+    fgets(answer, 256, stdin);
+
     int i = 0;
-    while(line[i] != '\n')
+
+    while(answer[i] != '\n' && answer[i] != '\0' && answer[i] != EOF)
     {
         i++;
     }
 
-    if(line[i] == '\n')
+    if(answer[i] == '\n' && answer[i] != '\0' && answer[i] != EOF)
     {
-        line[i] = '\0';
+        answer[i] = '\0';
     }
 }

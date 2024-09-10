@@ -10,10 +10,8 @@ enum quantity_roots
     ZERO_ROOTS,
     ONE_ROOT,
     TWO_ROOTS,
-    // что такое количество корней "равно"?
-    EQUAl = -1
+    INFINITE_ROOTS = -1
 };
-// TODO блять, заебал
 
 struct roots
 {

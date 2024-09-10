@@ -3,16 +3,11 @@
 
 coeffs input_coeffs()
 {
-
     double a = 0, b = 0, c = 0;
 
-    // TODO опять же, можно просто int right_numb_coeffs = scanf(...);
-    int right_numb_coeffs = 0;
+    int right_numb_coeffs = scanf("%lf %lf %lf", &a, &b, &c);
 
-    right_numb_coeffs = scanf("%lf %lf %lf", &a, &b, &c);
-
-    // TODO не инициализировал
-    coeffs all_coeffs;
+    struct coeffs all_coeffs = {};
 
     while(right_numb_coeffs != 3)
     {
@@ -46,7 +41,7 @@ void output_answ(roots final_roots)
         case ZERO_ROOTS:
             printf("Корней у уравнения нет нихуя, пошел в пизду, милый друг\n");
             break;
-        case EQUAl:
+        case INFINITE_ROOTS:
             printf("Блять, ну получил ты что 0 = 0 и чего ты добивался???\n");
             break;
         default:

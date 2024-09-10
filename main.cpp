@@ -1,13 +1,12 @@
 #include "input_and_output.h"
-#include "count_roots.h"
+#include "find_roots.h"
+
+#define ARRAY_LENGTH(arr) (sizeof(arr)/sizeof(arr[0]))
 
 
 int main()
 {
     roots answ_of_quadr_solver = {};
-
-    // TODO переменные надо создавать там, где ты их используешь
-    coeffs final_coeffs = {};
 
     const char* yes_strings[] = {
         "yes",
@@ -16,9 +15,7 @@ int main()
         "сэр да сэр"
     };
 
-    // TODO Сделай макрос для нахождения размера
-    // А ещё это константа так-то
-    size_t size_yes_strings = sizeof(yes_strings) / sizeof(yes_strings[0]);
+    const size_t size_yes_strings = ARRAY_LENGTH(yes_strings);
 
     const char* no_strings[] = {
         "no",
@@ -27,7 +24,7 @@ int main()
         "неа"
     };
 
-    size_t size_no_strings = sizeof(no_strings) / sizeof(no_strings[0]);
+    const size_t size_no_strings = ARRAY_LENGTH(no_strings);
 
     char user_answer[256] = {};
 
@@ -35,16 +32,9 @@ int main()
 
     do
     {
-        // TODO Вот нахрена это проверять здесь? Вообще не понятно, зачем это делать
-        // в начале, а не в конце.
-        if(check_input_yes_or_no(yes_strings, user_answer, size_yes_strings))
-        {
-            printf("Okay, man. Вводи коэффициенты:\n");
-        }
+        struct coeffs final_coeffs = input_coeffs();
 
-        final_coeffs = input_coeffs();
-
-        answ_of_quadr_solver = count_roots(final_coeffs.first, final_coeffs.second, final_coeffs.third);
+        answ_of_quadr_solver = find_roots(final_coeffs.first, final_coeffs.second, final_coeffs.third);
 
         output_answ(answ_of_quadr_solver);
 
@@ -52,9 +42,7 @@ int main()
 
         buff_clean();
 
-        fgets(user_answer, 256, stdin);
-        // TODO эти вызовы вообще можно в одну функцию объединить
-        delete_line_break(user_answer);
+        user_request(user_answer);
         // TODO про check_input_yes_or_no. Очень странные аргументы передаются.
         // сделай отдельно check_input_yes и check_input_no, которые уже будут вызывать вот эту страшную
         // check_input_yes_or_no, и сделай так, чтобы её саму нельзя было вызывать извне. (static)
@@ -66,9 +54,12 @@ int main()
         {
             printf("Да заебал, введи нормально ответ, да да, нет нет\n");
 
-            fgets(user_answer, 256, stdin);
+            user_request(user_answer);
+        }
 
-            delete_line_break(user_answer);
+        if(check_input_yes_or_no(yes_strings, user_answer, size_yes_strings))
+        {
+            printf("Okay, man. Вводи коэффициенты:\n");
         }
 
     } while(check_input_yes_or_no(yes_strings, user_answer, size_yes_strings));

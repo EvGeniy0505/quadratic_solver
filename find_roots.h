@@ -8,8 +8,6 @@
 #include "other_func.h"
 #include "input_and_output.h"
 
-
-
-roots count_roots(double first_coef, double second_coef, double third_coef);
+roots find_roots(double first_coef, double second_coef, double third_coef);
 
 #endif
