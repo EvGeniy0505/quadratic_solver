@@ -5,13 +5,30 @@ bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quan
 {
     for(size_t i = 0; i < quantity_of_strs; i++)
     {
-        if(strcasecmp(all_strings[i], answer) == 0)   // TODO написать свою
+        if(strcasecmp_russ(all_strings[i], answer) == 0)  
         {
             return true;
         }
     }
 
     return false;
+}
+
+
+int strcasecmp_russ(const char* str_1, const char* str_2)
+{
+    while((*str_1 == *str_2) || (abs(*str_1 - *str_2) == 32))
+    {
+        str_1++;
+        str_2++;
+
+        if(*str_2 == '\0')
+        {
+            return 0;
+        }
+    }
+
+    return *str_1 - *str_2;
 }
 
 

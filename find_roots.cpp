@@ -1,49 +1,71 @@
 #include "find_roots.h"
 
 
-// TODO 
-// функция большая пиздец, я даже разбираться не хочу
-// разбей на функции для квадратного уравнения и для линейного
-roots find_roots(double first_coef, double second_coef, double third_coef)
+
+roots find_roots_quantity(double first_coef_q, double second_coef_q, double third_coef_q)
 {
     double det = 0;
 
-    det = (second_coef * second_coef - 4 * first_coef * third_coef);
+    det = (second_coef_q * second_coef_q - 4 * first_coef_q * third_coef_q);
 
-    roots all_roots;
+    roots q_roots = {};
 
-    if(equal_null(first_coef) && equal_null(second_coef) && equal_null(third_coef))
-    {
-        all_roots.quantity_of_roots = INFINITE_ROOTS;
-    }
-
-    else if(equal_null(first_coef))
-    {
-        all_roots.x_1 = (- third_coef) / (second_coef);
-
-        all_roots.quantity_of_roots = ONE_ROOT;
-    }
-
-    else if(det > 0)
+    if(det > 0)
     {
         det = sqrt(det);
 
-        all_roots.x_1 = (- second_coef + (det)) / (2 * first_coef);
+        q_roots.x_1 = (- second_coef_q + (det)) / (2 * first_coef_q);
 
-        all_roots.x_2 = (- second_coef - (det)) / (2 * first_coef);
+        q_roots.x_2 = (- second_coef_q - (det)) / (2 * first_coef_q);
 
-        all_roots.quantity_of_roots = TWO_ROOTS;
+        q_roots.quantity_of_roots = TWO_ROOTS;
     }
     else if(det < 0)
     {
-        all_roots.quantity_of_roots = ZERO_ROOTS;
+        q_roots.quantity_of_roots = ZERO_ROOTS;
     }
     else if(equal_null(det))
     {
-        all_roots.x_1 = (- second_coef) / (2 * first_coef);
+        q_roots.x_1 = (- second_coef_q) / (2 * first_coef_q);
 
-        all_roots.quantity_of_roots = ONE_ROOT;
+        q_roots.quantity_of_roots = ONE_ROOT;
     }
 
-    return all_roots;
+    return q_roots;
+}
+
+roots find_roots_linear(double second_coef_l, double third_coef_l)
+{
+    roots l_roots = {};
+
+    if(equal_null(second_coef_l) && equal_null(third_coef_l))
+    {
+        l_roots.quantity_of_roots = INFINITE_ROOTS;
+    }
+    else
+    {
+        l_roots.x_1 = (- third_coef_l) / (second_coef_l);
+
+        l_roots.quantity_of_roots = ONE_ROOT;
+    }
+
+    return l_roots;
+}
+
+roots find_roots_final(double first_coef, double second_coef, double third_coef)
+{
+    roots all_roots = {};
+
+    if(equal_null(first_coef))
+    {
+        all_roots = find_roots_linear(second_coef, third_coef);
+
+        return all_roots;
+    }
+    else
+    {
+        all_roots = find_roots_quantity(first_coef, second_coef, third_coef);
+
+        return all_roots;
+    }
 }

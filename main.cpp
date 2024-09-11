@@ -1,9 +1,6 @@
 #include "input_and_output.h"
 #include "find_roots.h"
 
-#define ARRAY_LENGTH(arr) (sizeof(arr)/sizeof(arr[0]))
-
-
 int main()
 {
     roots answ_of_quadr_solver = {};
@@ -32,9 +29,9 @@ int main()
 
     do
     {
-        struct coeffs final_coeffs = input_coeffs();
+        struct coeffs final_coeffs = input_coeffs(); 
 
-        answ_of_quadr_solver = find_roots(final_coeffs.first, final_coeffs.second, final_coeffs.third);
+        answ_of_quadr_solver = find_roots_final(final_coeffs.first, final_coeffs.second, final_coeffs.third);
 
         output_answ(answ_of_quadr_solver);
 
