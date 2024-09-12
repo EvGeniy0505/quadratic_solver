@@ -42,7 +42,7 @@ void output_answ(roots final_roots)
             printf("Корней у уравнения нет нихуя, пошел в пизду, милый друг\n");
             break;
         case INFINITE_ROOTS:
-            printf("Блять, ну получил ты что 0 = 0 и чего ты добивался???\n");
+            printf("Блять, ну получил ты что 0 = 0 и чего ты добивался??? Корней просто дохуя...\n");
             break;
         default:
             printf("ERROR!!! Sorry, твоё очко cry\n");

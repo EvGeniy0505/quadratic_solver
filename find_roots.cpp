@@ -42,6 +42,10 @@ roots find_roots_linear(double second_coef_l, double third_coef_l)
     {
         l_roots.quantity_of_roots = INFINITE_ROOTS;
     }
+    else if(equal_null(second_coef_l))
+    {
+        l_roots.quantity_of_roots = ZERO_ROOTS;
+    }
     else
     {
         l_roots.x_1 = (- third_coef_l) / (second_coef_l);
