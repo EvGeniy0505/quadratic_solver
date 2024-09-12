@@ -1,7 +1,36 @@
 #include "other_func.h"
 
+static bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quantity_of_strs);
 
-bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quantity_of_strs)
+bool check_input_yes(char answer[])
+{
+    const char* yes_strings[] = {
+        "yes",
+        "да",
+        "хочу",
+        "сэр да сэр"
+    };
+
+    const size_t size_yes_strings = ARRAY_LENGTH(yes_strings);
+
+    return check_input_yes_or_no(yes_strings, answer, size_yes_strings);
+}
+
+bool check_input_no(char answer[])
+{
+    const char* no_strings[] = {
+        "no",
+        "нет",
+        "иди нахуй",
+        "неа"
+    };
+
+    const size_t size_no_strings = ARRAY_LENGTH(no_strings);
+
+    return check_input_yes_or_no(no_strings, answer, size_no_strings);
+}
+
+static bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quantity_of_strs)
 {
     for(size_t i = 0; i < quantity_of_strs; i++)
     {
@@ -12,7 +41,6 @@ bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quan
     }
     return false;
 }
-
 
 int strcasecmp_russ(const char* str_1, const char* str_2)
 {
@@ -30,7 +58,6 @@ int strcasecmp_russ(const char* str_1, const char* str_2)
     return *str_1 - *str_2;
 }
 
-
 void buff_clean()
 {
     int next_symb = getchar();
@@ -40,7 +67,6 @@ void buff_clean()
         next_symb = getchar();
     }
 }
-
 
 int equal_null(double var)
 {
