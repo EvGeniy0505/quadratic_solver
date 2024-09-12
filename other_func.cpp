@@ -10,14 +10,13 @@ bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quan
             return true;
         }
     }
-
     return false;
 }
 
 
 int strcasecmp_russ(const char* str_1, const char* str_2)
 {
-    while((*str_1 == *str_2) || (abs(*str_1 - *str_2) == 32))
+    while(((*str_1 == *str_2) || (abs(*str_1 - *str_2) == 32)) && *str_1 && *str_2)
     {
         str_1++;
         str_2++;
@@ -30,10 +29,6 @@ int strcasecmp_russ(const char* str_1, const char* str_2)
 
     return *str_1 - *str_2;
 }
-
-
-
-
 
 
 void buff_clean()
