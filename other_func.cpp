@@ -93,7 +93,7 @@ void user_request(char answer[])
         i++;
     }
 
-    if(answer[i] == '\n' && answer[i] != '\0' && answer[i] != EOF)
+    if(answer[i] == '\n')
     {
         answer[i] = '\0';
     }

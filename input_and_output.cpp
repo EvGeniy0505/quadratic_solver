@@ -1,5 +1,6 @@
 #include "input_and_output.h"
 
+static bool buff_check();
 
 coeffs input_coeffs()
 {
@@ -7,16 +8,18 @@ coeffs input_coeffs()
 
     int right_numb_coeffs = scanf("%lf %lf %lf", &a, &b, &c);
 
+    printf("%d", right_numb_coeffs);
+
     struct coeffs all_coeffs = {};
 
-    while(right_numb_coeffs != 3)
+    // TODO когда Ctrl+D бесконечный цикл
+    while((right_numb_coeffs != 3 || buff_check()) || (a == EOF) || (b == EOF) || (c == EOF))
     {
         buff_clean();
 
         printf("Чё за хуйня??? Быстро введи ещё раз нормально коффициенты в одну строку через пробел\n");
 
         right_numb_coeffs = scanf("%lf %lf %lf", &a, &b, &c);
-
     }
 
     all_coeffs.first  = a;
@@ -25,6 +28,22 @@ coeffs input_coeffs()
 
     return all_coeffs;
 }
+
+ static bool buff_check()
+{
+    int symb = getchar();
+
+    while(symb != '\n' && symb != EOF) 
+    {
+        if(symb != ' ')
+        {
+            return true;
+        }
+        symb = getchar();
+    }
+    return false;
+}
+
 
 void output_answ(roots final_roots)
 {

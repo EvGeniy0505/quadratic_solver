@@ -19,8 +19,6 @@ int main()
 
         printf("Бляха, еще решать эту хуйню хочешь?\n");
 
-        buff_clean();
-
         user_request(user_answer);
 
         while(!check_input_yes(user_answer) &&
@@ -35,7 +33,7 @@ int main()
         {
             printf("Okay, man. Вводи коэффициенты:\n");
         }
-
+        
     } while(check_input_yes(user_answer));
 
     printf("Пиздец люблю Полину Новикову и котиков\n");
