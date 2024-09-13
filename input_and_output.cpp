@@ -8,12 +8,11 @@ coeffs input_coeffs()
 
     int right_numb_coeffs = scanf("%lf %lf %lf", &a, &b, &c);
 
-    printf("%d", right_numb_coeffs);
-
     struct coeffs all_coeffs = {};
 
     // TODO когда Ctrl+D бесконечный цикл
-    while((right_numb_coeffs != 3 || buff_check()) || (a == EOF) || (b == EOF) || (c == EOF))
+    //  (a == EOF) || (b == EOF) || (c == EOF))
+    while(right_numb_coeffs != 3 || buff_check())
     {
         buff_clean();
 
