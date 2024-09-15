@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <math.h>
+
 #include "other_func.h"
 
 static bool check_input_yes_or_no(const char* all_strings[], char answer[], size_t quantity_of_strs);
@@ -6,6 +9,7 @@ bool check_input_yes(char answer[])
 {
     const char* yes_strings[] = {
         "yes",
+        "y",
         "да",
         "хочу",
         "сэр да сэр"
@@ -20,6 +24,7 @@ bool check_input_no(char answer[])
 {
     const char* no_strings[] = {
         "no",
+        "n",
         "нет",
         "иди нахуй",
         "неа"
@@ -49,7 +54,7 @@ int strcasecmp_russ(const char* str_1, const char* str_2)
         str_1++;
         str_2++;
 
-        if(*str_2 == '\0')
+        if(*str_2 == '\0' && *str_1 == '\0')
         {
             return 0;
         }
@@ -58,19 +63,9 @@ int strcasecmp_russ(const char* str_1, const char* str_2)
     return *str_1 - *str_2;
 }
 
-void buff_clean()
-{
-    int next_symb = getchar();
-
-    while(next_symb != '\n' && next_symb != EOF)
-    {
-        next_symb = getchar();
-    }
-}
-
 int equal_null(double var)
 {
-    double eps = 0.0000001;
+    const double eps = 0.0000001;
 
     if(abs(var) < eps)
     {

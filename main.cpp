@@ -3,17 +3,15 @@
 
 int main()
 {
-    roots answ_of_quadr_solver = {};
+    printf("Hi, man! Введи 3 числа, коэффициентов квадратного уравнения, чтобы у тебя не порвалось очко\n");
 
     char user_answer[256] = {};
-
-    printf("Hi, man! Введи 3 числа, коэффициентов квадратного уравнения, чтобы у тебя не порвалось очко\n");
 
     do
     {
         struct coeffs final_coeffs = input_coeffs(); 
 
-        answ_of_quadr_solver = find_roots_final(final_coeffs.first, final_coeffs.second, final_coeffs.third);
+        struct roots answ_of_quadr_solver = find_roots_final(final_coeffs.first, final_coeffs.second, final_coeffs.third);
 
         output_answ(answ_of_quadr_solver);
 

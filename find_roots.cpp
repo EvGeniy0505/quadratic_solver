@@ -1,5 +1,6 @@
-#include "find_roots.h"
+#include <math.h>
 
+#include "find_roots.h"
 
 
 roots find_roots_quantity(double first_coef_q, double second_coef_q, double third_coef_q)
@@ -15,7 +16,6 @@ roots find_roots_quantity(double first_coef_q, double second_coef_q, double thir
         det = sqrt(det);
 
         q_roots.x_1 = (- second_coef_q + (det)) / (2 * first_coef_q);
-
         q_roots.x_2 = (- second_coef_q - (det)) / (2 * first_coef_q);
 
         q_roots.quantity_of_roots = TWO_ROOTS;
@@ -63,13 +63,11 @@ roots find_roots_final(double first_coef, double second_coef, double third_coef)
     if(equal_null(first_coef))
     {
         all_roots = find_roots_linear(second_coef, third_coef);
-
-        return all_roots;
     }
     else
     {
         all_roots = find_roots_quantity(first_coef, second_coef, third_coef);
-
-        return all_roots;
     }
+
+    return all_roots;
 }

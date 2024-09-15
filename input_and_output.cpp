@@ -1,48 +1,28 @@
+#include <ctype.h>
+
 #include "input_and_output.h"
 
 static bool buff_check();
 
+static void buff_clean();
+
 coeffs input_coeffs()
 {
-    double a = 0, b = 0, c = 0;
-
-    int right_numb_coeffs = scanf("%lf %lf %lf", &a, &b, &c);
-
     struct coeffs all_coeffs = {};
 
-    // TODO когда Ctrl+D бесконечный цикл
-    //  (a == EOF) || (b == EOF) || (c == EOF))
+    int right_numb_coeffs = scanf("%lf %lf %lf", &all_coeffs.first, &all_coeffs.second , &all_coeffs.third);
+
     while(right_numb_coeffs != 3 || buff_check())
     {
         buff_clean();
 
         printf("Чё за хуйня??? Быстро введи ещё раз нормально коффициенты в одну строку через пробел\n");
 
-        right_numb_coeffs = scanf("%lf %lf %lf", &a, &b, &c);
+        right_numb_coeffs = scanf("%lf %lf %lf", &all_coeffs.first, &all_coeffs.second , &all_coeffs.third);
     }
-
-    all_coeffs.first  = a;
-    all_coeffs.second = b;
-    all_coeffs.third  = c;
 
     return all_coeffs;
 }
-
- static bool buff_check()
-{
-    int symb = getchar();
-
-    while(symb != '\n' && symb != EOF) 
-    {
-        if(symb != ' ')
-        {
-            return true;
-        }
-        symb = getchar();
-    }
-    return false;
-}
-
 
 void output_answ(roots final_roots)
 {
@@ -65,4 +45,29 @@ void output_answ(roots final_roots)
         default:
             printf("ERROR!!! Sorry, твоё очко cry\n");
     }
+}
+
+static void buff_clean()
+{
+    int next_symb = getchar();
+
+    while(next_symb != '\n' && next_symb != EOF)
+    {
+        next_symb = getchar();
+    }
+}
+
+static bool buff_check()
+{
+    int symb = getchar();
+
+    while(symb != '\n' && symb != EOF) 
+    {
+        if(!isspace(symb)) 
+        {
+            return true;
+        }
+        symb = getchar();
+    }
+    return false;
 }

@@ -1,14 +1,7 @@
 #ifndef OTHER_FUNC
 #define OTHER_FUNC
 
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <stdlib.h>
-
 #define ARRAY_LENGTH(arr) (sizeof(arr)/sizeof(arr[0]))
-
-void buff_clean();
 
 int equal_null(double var);
 
